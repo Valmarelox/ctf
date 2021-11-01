@@ -11,6 +11,7 @@ We are able to receive the encrypted flag from the server and also get the key (
 To decrypt the encrypted flag - we are missing 2 bytes of the key and the entire iv. attempting all possible keys is easy (there are only 2^16 options).
 To get the IV - we need to get creative and abuse the usage of CBC here - a remainder of how cbc encryption works
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/CBC_encryption.svg/600px-CBC_encryption.svg.png)
+
 How do we abuse this to get the iv? we use the fact the plaintext is xored with the IV before the AES encryption takes place, send 32 bytes of '\0' to the server - which will cause something very nice to happen - We will basically get the IV encrypted twice using normal AES-ECB as the second block of the encryption - which is important, because in the responses the server only returns a part of the first block - but sometimes the entire second block (so lets request an encrytion multiple times until we have an entire second block.
 So for each key guess - we try to decrypt the `twice_encrypted_iv` and get an iv guess - again there are only 2^16 options - so bruteforcing is trivial.
 For each key&IV pair - try to decrypt the flag, and break on the first plaintext that contains only printable characters.
