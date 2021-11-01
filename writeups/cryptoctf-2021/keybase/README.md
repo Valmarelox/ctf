@@ -2,7 +2,7 @@
 Breaking weird AES-CBC
 
 ### Exploit script
-[Exploit script](./solver.py)t
+[Exploit script](./solver.py)
 
 ### Writeup
 The challenge involves decrypting a flag encrypted with aes-cbc with an "almost known key" (we get the key except for the last 2 bytes) but an unknown IV.
