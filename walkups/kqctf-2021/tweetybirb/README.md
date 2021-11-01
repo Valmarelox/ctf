@@ -30,3 +30,4 @@ I believed this would work - but it crashed the binary :(
 I looked at the created coredump and saw it was caused in some random opcode that uses an `xmm` register. I quickly checked the `rsp`  in the dump and it was `0xXXXXXXXXXXXXXXX8` - and the amd64 ABI mandated that `rsp & ~0xF == rsp` (16 byte alignment) before executing SSE2 instructions - I added another dummy `ret` to the rop chain to align the stack and viola!
 I overcomplicated the challenge a bit but it made it a bigger challenge - also I got a shell instead of only the flag, which is always more rewarding :P
 
+Full exploit [code](./tweety.py)
